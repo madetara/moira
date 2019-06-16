@@ -85,7 +85,7 @@ func main() {
 	localSource := local.Create(database)
 	remoteConfig := config.Remote.GetRemoteSourceSettings()
 	remoteSource := remote.Create(remoteConfig)
-	metricSourceProvider := metricSource.CreateMetricSourceProvider(localSource, remoteSource)
+	metricSourceProvider := metricSource.CreateMetricSourceProvider(localSource, remoteSource, nil)
 
 	notifierConfig := config.Notifier.getSettings(logger)
 
