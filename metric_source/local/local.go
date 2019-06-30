@@ -12,7 +12,7 @@ import (
 	"github.com/moira-alert/moira/metric_source"
 )
 
-// Local is implementation of MetricSource interface, which implements fetch metrics method from moira database installation
+// LocalTrigger is implementation of MetricSource interface, which implements fetch metrics method from moira database installation
 type Local struct {
 	dataBase moira.Database
 }
