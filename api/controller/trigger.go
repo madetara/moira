@@ -24,6 +24,9 @@ func UpdateTrigger(dataBase moira.Database, trigger *dto.TriggerModel, triggerID
 
 // saveTrigger create or update trigger data and update trigger metrics in last state
 func saveTrigger(dataBase moira.Database, trigger *moira.Trigger, triggerID string, timeSeriesNames map[string]bool) (*dto.SaveTriggerResponse, *api.ErrorResponse) {
+	if !triggerIsValid(trigger) {
+		return nil, nil
+	}
 	if err := dataBase.AcquireTriggerCheckLock(triggerID, 10); err != nil {
 		return nil, api.ErrorInternalServer(err)
 	}
@@ -64,6 +67,10 @@ func saveTrigger(dataBase moira.Database, trigger *moira.Trigger, triggerID stri
 		Message: "trigger updated",
 	}
 	return &resp, nil
+}
+
+func triggerIsValid(trigger *moira.Trigger) bool {
+	return true
 }
 
 // GetTrigger gets trigger with his throttling - next allowed message time
